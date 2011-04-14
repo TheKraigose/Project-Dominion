@@ -1,0 +1,25 @@
+Project Dominion README::
+
+To build, zip up the data folder and all lua files into a .love file.
+
+I reccomend for GUI users to use 7Zip on Windows.
+
+People on Linux/Unix/Mac OS X probably know of better ways ;P
+
+Then run with Love2D.
+
+A better manual will be designed, but for now:
+
+Controls once in a game:
+W -> Move Forward
+S -> Move Backward
+Left Arrow -> Rotate Counter Clockwise
+Right Arrow -> Rotate Clockwise
+E -> Fire Weapon
+1, 2 and 3 select the different weapons, but you need to pick them up first.
+
+Weapons:
+
+Trusty Handgun -> A basic pistol, has unlimited ammo but it also can't auto-fire
+Submachine Gun -> The tommy gun of the enemy auto-fires, but isn't as fast as...
+Chaingun -> CHAINGUUUUUUUUUUUN. Oh heck yes.
