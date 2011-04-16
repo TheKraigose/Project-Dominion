@@ -15,7 +15,7 @@ function updateObjs()
 			end
 		elseif objects[i].isenemy == true then
 			-- If is a Baghead Soldier
-			if objects[i].thingType == 2 then
+			if objects[i].thingType == 1 then
 				if objects[i].hp >= 1 then
 					local curX = objects[i].x
 					local curY = objects[i].y
@@ -32,23 +32,16 @@ function updateObjs()
 					local dx = hero.x - objects[i].x
 					local dy = hero.y - objects[i].y
 					local dist = math.sqrt(dx*dx + dy*dy)
-					if dist > 120 and dist < 440 then
+					if dist > 120 and dist < 400 then
 						local angle = math.atan2(dy, dx)
 						objects[i].rot = angle
-					if isblocking(newtempX, newtempY) then
-						local tmpDegrees = math.deg(objects[i].rot)
-						tmpDegrees = tmpDegrees + math.random(65, 110)
-						if (tmpDegrees >= 360) then
-							tmpDegrees = tmpDegrees - 359
-						end
-						objects[i].rot = math.rad(tmpDegrees)
-						objects[i].x = newtempX
-						objects[i].y = newtempY
-					end
-					objects[i].x = newtempX
-					objects[i].y = newtempY
-					else
+						local tpos = {}
+						tpos = checkCollision(objects[i].x, objects[i].y, newtempX, newtempY, 0.35)
+						objects[i].x = tpos.x
+						objects[i].y = tpos.y
+					elseif dist <= 120 and isblocking(newtempX, newtempY) == false then
 						if (objects[i].cooldown >= 35) then
+							objects[i].rot = math.atan2(dy, dx)	-- face the player
 							A_BulletAttack(1, objects[i].x, objects[i].y, objects[i].rot)
 							objects[i].cooldown = 0
 						else
@@ -58,7 +51,7 @@ function updateObjs()
 				end
 			end
 			-- If a Bird Soldier
-			if objects[i].thingType == 3 then
+			if objects[i].thingType == 2 then
 				if objects[i].hp >= 1 then
 					local curX = objects[i].x
 					local curY = objects[i].y
@@ -75,23 +68,16 @@ function updateObjs()
 					local dx = hero.x - objects[i].x
 					local dy = hero.y - objects[i].y
 					local dist = math.sqrt(dx*dx + dy*dy)
-					if dist > 120 and dist < 490 then
+					if dist > 120 and dist < 400 then
 						local angle = math.atan2(dy, dx)
 						objects[i].rot = angle
-					if isblocking(newtempX, newtempY) then
-						local tmpDegrees = math.deg(objects[i].rot)
-						tmpDegrees = tmpDegrees + math.random(65, 110)
-						if (tmpDegrees >= 360) then
-							tmpDegrees = tmpDegrees - 359
-						end
-						objects[i].rot = math.rad(tmpDegrees)
-						objects[i].x = newtempX
-						objects[i].y = newtempY
-					end
-					objects[i].x = newtempX
-					objects[i].y = newtempY
-					else
+						local tpos = {}
+						tpos = checkCollision(objects[i].x, objects[i].y, newtempX, newtempY, 0.35)
+						objects[i].x = tpos.x
+						objects[i].y = tpos.y
+					elseif dist <= 120 and isblocking(newtempX, newtempY) == false then
 						if (objects[i].cooldown >= 25) then
+							objects[i].rot = math.atan2(dy, dx)	-- face the player
 							A_BulletAttack(1, objects[i].x, objects[i].y, objects[i].rot)
 							objects[i].cooldown = 0
 						else

@@ -1,0 +1,43 @@
+MAP CREATION SPECIFICATIONS
+
+Background tile layer is hard-coded based
+on the range of levels.
+
+Tiles range from 1 to 172 IIRC, and corrispond
+to a tile named tile#.png where # is a number
+between 1 and 172. They are all solid at this
+moment.
+
+Objects layer
+0 = nothing, ignore
+1 = Baghead Grunt
+2 = Bird Soldier
+3 = FurEnforcer
+4 = Numnum Cat
+5 = BOSS - "Colonel" Poole Toi
+6 = BOSS - "General" Stephen Fattlove
+7 = BOSS - La Grenouille
+8 = BOSS - Grandemallard
+9 = BOSS - Originali-Tree
+10 = BOSS - "Queen" Abigail Original
+11 = Submachine Gun
+12 = Submachine Ammo
+13 = Chaingun
+14 = Chaingun Ammo
+15 = Rocket Launcher
+16 = Rocket Ammo
+17 = Maplethrower
+18 = Maple Syrup Ammo
+19 = Small Health Kit
+20 = Large Health Kit
+21 = One Up
+22 = Freshslice Pizza (100 pts)
+23 = Tim Hortons Coffee (200 pts)
+24 = Quebec Fries (500 pts)
+25 = Mr. Sub Sub (1000 pts)
+26 = player spawn point (East)
+27 = player spawn point (South)
+28 = player spawn point (West)
+29 = player spawn point (North)
+30 = exit (normal)
+31 = exit (secret)

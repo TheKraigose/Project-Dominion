@@ -37,6 +37,7 @@ function checkForRespawn()
 		hero.y = pRespawnPoint.y
 		hero.alive = true
 		hero.hp = 100
+		hero.lives = hero.lives - 1
 		hero.weaponSelected = 1
 		hero.hasWeapon = {true, false, false, false, false}
 		hero.hasAmmo = {0, 0, 0, 0, 0}

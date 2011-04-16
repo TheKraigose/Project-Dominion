@@ -1,6 +1,6 @@
 function SpawnItem(objtype, x, y)
-	objecttemp.x = x - math.floor(x % 32)
-	objecttemp.y = y - math.floor(y % 32)
+		objecttemp.x = math.floor(x)
+		objecttemp.y = math.floor(y)
 	if objtype == 50 then
 		objecttemp.hp = 0
 		objecttemp.rot = 0

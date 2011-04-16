@@ -1,3 +1,111 @@
+function checkCollision(fromX, fromY, toX, toY, radius)
+	local posObj = {}
+	posObj.x = fromX
+	posObj.y = fromY
+	
+	if ((toY < 0) or (toY >= mapHeight * tileSize) or
+		(toX < 0) or (toX >= mapWidth * tileSize)) then
+		return posObj
+	end
+	
+	local blockX = math.floor(toX)
+	local blockY = math.floor(toY)
+	
+	if (isblocking(blockX, blockY)) then
+		return posObj
+	end
+	
+	posObj.x = toX
+	posObj.y = toY
+	
+	local blockTop = isblocking(blockX, blockY-1)
+	local blockBottom = isblocking(blockX, blockY+1)
+	local blockLeft = isblocking(blockX-1, blockY)
+	local blockRight = isblocking(blockX+1, blockY)
+	
+	if (blockTop == false) and ((toY - blockY) < radius) then
+		posObj.y = blockY + radius
+		toY = posObj.y
+	end
+	
+	if (blockLeft == false) and ((toX - blockX) < radius) then
+		posObj.x = blockX + radius
+		toX = posObj.x
+	end
+	
+	if ((blockRight == false) and (((blockX + 1) - toX) < radius)) then
+		posObj.x = (blockX + 1) - radius
+		toX = posObj.x
+	end
+	
+	if ((blockBottom == false) and (((blockY + 1) - toY) < radius)) then
+		posObj.y = (blockY + 1) - radius
+		toY = posObj.y
+	end
+	
+	if ((isblocking(blockX-1, blockY-1) == false) and
+		(blockTop == true and blockLeft == true)) then
+		local dx = toX - blockX
+		local dy = toY - blockY
+		if (dx*dx+dy*dy < radius*radius) then
+			if (dx*dx > dy*dy) then
+				posObj.x = blockX + radius
+				toX = posObj.x
+			else
+				posObj.y = blockY + radius
+				toY = posObj.y
+			end
+		end
+	end
+
+	if ((isblocking(blockX+1, blockY-1) == false) and
+		(blockTop == true and blockRight == true)) then
+		local dx = toX - (blockX+1)
+		local dy = toY - blockY
+		if (dx*dx+dy*dy < radius*radius) then
+			if (dx*dx > dy*dy) then
+				posObj.x = blockX + 1 - radius
+				toX = posObj.x
+			else
+				posObj.y = blockY + radius
+				toY = posObj.y
+			end
+		end
+	end
+	
+	if ((isblocking(blockX-1, blockY+1) == false) and
+		(blockBottom == true and blockLeft == true)) then
+		local dx = toX - blockX
+		local dy = toY - (blockY + 1)
+		if (dx*dx+dy*dy < radius*radius) then
+			if (dx*dx > dy*dy) then
+				posObj.x = blockX + radius
+				toX = posObj.x
+			else
+				posObj.y = blockY + 1 - radius
+				toY = posObj.y
+			end
+		end
+	end
+	
+	if ((isblocking(blockX+1, blockY+1) == false) and
+		(blockBottom == true and blockRight == true)) then
+		local dx = toX - (blockX+1)
+		local dy = toY - (blockY+1)
+		if (dx*dx+dy*dy < radius*radius) then
+			if (dx*dx > dy*dy) then
+				posObj.x = blockX + 1 - radius
+				toX = posObj.x
+			else
+				posObj.y = blockY + 1 - radius
+				toY = posObj.y
+			end
+		end
+	end
+	
+	return posObj
+end
+
 -- returns if the player is going to go either
 -- out of bounds of the current level OR going
 -- to collide with a solid object. (Needs to check
@@ -18,7 +126,7 @@ end
 
 -- If the player collides with the exit tile, return
 function collideWithExit(x, y)
-	return currentobjmap[math.floor(y / tileSize)][math.floor(x / tileSize)] == 203
+	return currentobjmap[math.floor(y / tileSize)][math.floor(x / tileSize)] == 210
 end
 
 -- Collide with any pickups

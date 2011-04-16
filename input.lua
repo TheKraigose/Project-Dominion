@@ -2,6 +2,7 @@
 -- various input methods. We convert
 -- from radians to degrees for calculations
 function movePlayer(dt)
+	if hero.alive == true then
 	-- Rotation code for turning right and left
 	if love.keyboard.isDown("right") then
 		hero.rot = math.deg(hero.rot)
@@ -73,22 +74,24 @@ function movePlayer(dt)
 	if love.keyboard.isDown("w") then
 		newX = hero.x + (curSpeed * math.cos(hero.rot))
 		newY = hero.y + (curSpeed * math.sin(hero.rot))
-		if isblocking(newX, newY) then
-			return
-		end
-		hero.x = newX
-		hero.y = newY
+		local pos = {}
+		pos = checkCollision(hero.x, hero.y, newX, newY, 0.35)
+		
+		hero.x = pos.x
+		hero.y = pos.y
+		pos = {}
 	end
 	
 	-- move backward
 	if love.keyboard.isDown("s") then
 		newX = hero.x - (curSpeed * math.cos(hero.rot))
 		newY = hero.y - (curSpeed * math.sin(hero.rot))
-		if isblocking(newX, newY) then
-			return
-		end
-		hero.x = newX
-		hero.y = newY
+		local pos = {}
+		pos = checkCollision(hero.x, hero.y, newX, newY, 0.35)
+		
+		hero.x = pos.x
+		hero.y = pos.y
+		pos = {}
 	end
 	
 	if love.keyboard.isDown("1") then
@@ -114,12 +117,15 @@ function movePlayer(dt)
 		for i, v in ipairs(objects) do
 			table.remove(objects, i)
 		end
+		for i, v in ipairs(objects) do
+			table.remove(objects, i)
+		end
 		objectsSpawned = false
 	end
 	
 	local collideObj = {}
 	collideObj = collideWithItem(hero.x, hero.y)
-	if collideObj ~= nil and collideObj.thingType == 50 then
+	if collideObj ~= nil and collideObj.thingType == 11 then
 		local pickupSuccess = false
 		if hero.hasWeapon[2] == false then
 			hero.hasWeapon[2] = true
@@ -143,7 +149,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 51 then
+	if collideObj ~= nil and collideObj.thingType == 12 then
 		local pickupSuccess = false
 		if hero.hasAmmo[2] < 200 then
 			hero.hasAmmo[2] = hero.hasAmmo[2] + 25
@@ -162,7 +168,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 52 then
+	if collideObj ~= nil and collideObj.thingType == 13 then
 		local pickupSuccess = false
 		if hero.hasWeapon[3] == false then
 			hero.hasWeapon[3] = true
@@ -186,7 +192,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 53 then
+	if collideObj ~= nil and collideObj.thingType == 14 then
 		local pickupSuccess = false
 		if hero.hasAmmo[3] < 250 then
 			hero.hasAmmo[3] = hero.hasAmmo[3] + 25
@@ -205,7 +211,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 60 then
+	if collideObj ~= nil and collideObj.thingType == 19 then
 		local pickupSuccess = false
 		if hero.hp < 100 then
 			hero.hp = hero.hp + 15
@@ -224,7 +230,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 61 then
+	if collideObj ~= nil and collideObj.thingType == 21 then
 		local pickupSuccess = false
 		hero.hp = 100
 		hero.lives = hero.lives + 1
@@ -239,7 +245,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 62 then
+	if collideObj ~= nil and collideObj.thingType == 65 then
 		local pickupSuccess = false
 		score = score + 100
 		pickupSuccess = true
@@ -268,6 +274,7 @@ function movePlayer(dt)
 	else
 		curSpeed = regularSpeed
 		rotSpeed = rotRegSpeed
+	end
 	end
 end
 

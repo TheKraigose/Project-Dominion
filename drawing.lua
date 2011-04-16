@@ -79,9 +79,52 @@ function spawnObjects()
 	for yy=1, mapHeight, 1 do
 		for xx=1, mapWidth, 1 do	
 			obj = currentobjmap[yy][xx]
-			if obj == 1 and playerSpawned == false then
+			if obj == 26 and playerSpawned == false then
 				hero.x = xx * tileSize
 				hero.y = yy * tileSize
+				hero.rot = math.rad(0)
+				playerSpawned = true	-- so if there's a duplicate spawn
+										-- we only spawn at the first one found
+				plyrPosX = xx	-- remember the player's spawn point in case of death
+				plyrPosY = yy
+				objecttemp.x = xx * tileSize
+				objecttemp.y = yy * tileSize
+				pRespawnPoint = objecttemp
+				objecttemp = {}
+				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
+			end
+			if obj == 27 and playerSpawned == false then
+				hero.x = xx * tileSize
+				hero.y = yy * tileSize
+				hero.rot = math.rad(90)
+				playerSpawned = true	-- so if there's a duplicate spawn
+										-- we only spawn at the first one found
+				plyrPosX = xx	-- remember the player's spawn point in case of death
+				plyrPosY = yy
+				objecttemp.x = xx * tileSize
+				objecttemp.y = yy * tileSize
+				pRespawnPoint = objecttemp
+				objecttemp = {}
+				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
+			end
+			if obj == 28 and playerSpawned == false then
+				hero.x = xx * tileSize
+				hero.y = yy * tileSize
+				hero.rot = math.rad(180)
+				playerSpawned = true	-- so if there's a duplicate spawn
+										-- we only spawn at the first one found
+				plyrPosX = xx	-- remember the player's spawn point in case of death
+				plyrPosY = yy
+				objecttemp.x = xx * tileSize
+				objecttemp.y = yy * tileSize
+				pRespawnPoint = objecttemp
+				objecttemp = {}
+				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
+			end
+			if obj == 29 and playerSpawned == false then
+				hero.x = xx * tileSize
+				hero.y = yy * tileSize
+				hero.rot = math.rad(270)
 				playerSpawned = true	-- so if there's a duplicate spawn
 										-- we only spawn at the first one found
 				plyrPosX = xx	-- remember the player's spawn point in case of death
@@ -93,13 +136,13 @@ function spawnObjects()
 				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
 			end
 			-- if a basic grunt?
-			if obj == 2 then
+			if obj == 1 then
 				math.randomseed(os.time())
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 10
 				objecttemp.rot = math.random(1.0, 3.0)
-				objecttemp.thingType = 2			-- make it a guard
+				objecttemp.thingType = 1			-- make it a guard
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = true
 				objecttemp.isboss = false
@@ -109,13 +152,13 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 3 then
+			if obj == 2 then
 				math.randomseed(os.time())
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 20
 				objecttemp.rot = math.random(1.0, 3.0)
-				objecttemp.thingType = 3			-- make it a bird soldier
+				objecttemp.thingType = 2			-- make it a bird soldier
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = true
 				objecttemp.isboss = false
@@ -125,12 +168,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 50 then
+			if obj == 11 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 50		-- Make it a submachine gun
+				objecttemp.thingType = 11		-- submachine gun
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -139,12 +182,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 51 then
+			if obj == 12 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 51		-- Make it a submachine clip
+				objecttemp.thingType = 12		-- submachine ammo
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -153,12 +196,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-				if obj == 52 then
+				if obj == 13 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 52		-- Make it a submachine gun
+				objecttemp.thingType = 13		-- Chaingun
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -167,12 +210,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 53 then
+			if obj == 14 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 53		-- Make it a submachine gun
+				objecttemp.thingType = 14		-- Chaingun Ammo
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -181,12 +224,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 60 then
+			if obj == 19 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 60		-- Make it a small health kit
+				objecttemp.thingType = 19		-- Small Health Kit
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -195,12 +238,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 61 then
+			if obj == 21 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 61		-- Make it a small health kit
+				objecttemp.thingType = 21		-- Make it a 1up
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -209,12 +252,12 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 62 then
+			if obj == 22 then
 				objecttemp.x = xx * tileSize
 				objecttemp.y = yy * tileSize
 				objecttemp.hp = 0
 				objecttemp.rot = 0
-				objecttemp.thingType = 62		-- Make it a small health kit
+				objecttemp.thingType = 22		-- Make it a score item (Freshslice)
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = false
 				objecttemp.isboss = false
@@ -223,7 +266,7 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 203 then
+			if obj == 210 then
 				exitobj.x = xx * tileSize
 				exitobj.y = yy * tileSize
 			end
