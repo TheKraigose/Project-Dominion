@@ -2,7 +2,7 @@ Project Dominion README::
 
 To build, zip up the data folder and all lua files into a .love file.
 
-I reccomend for GUI users to use 7Zip on Windows.
+I reccomend for GUI users to use 7Zip on Windows. Save the file as "projdom1.love". The extension is important.
 
 People on Linux/Unix/Mac OS X probably know of better ways ;P
 
@@ -23,3 +23,7 @@ Weapons:
 Trusty Handgun -> A basic pistol, has unlimited ammo but it also can't auto-fire
 Submachine Gun -> The tommy gun of the enemy auto-fires, but isn't as fast as...
 Chaingun -> CHAINGUUUUUUUUUUUN. Oh heck yes.
+
+This game is open source. You may use the code for any purpose, provided you give credit to me and pass the open source license on. (Only applies to my LUA files)
+
+However, please refrain from using my assets other than for testing/seeing how it works. Do not reuse in commercial.
