@@ -52,7 +52,10 @@ function drawMiniMap()
 	for yyy=1, mapHeight, 1 do
 		for xxx=1, mapWidth, 1 do
 			if currmapnum <= 5 then
-				love.graphics.draw(tiles[116], (xxx * tileSize) - scrollOffsetX, (yyy * tileSize) - scrollOffsetY, 0, sprScale, sprScale, 0, 0)
+				if ((xxx * tileSize) > scrollOffsetX - (tileSize * 2)) and ((xxx * tileSize) < scrollOffsetX + (currWinWidth) + (tileSize * 2)) and
+					((yyy * tileSize) > scrollOffsetY - (tileSize * 2)) and ((yyy * tileSize) < scrollOffsetY + (currWinWidth) + (tileSize * 2)) then
+					love.graphics.draw(tiles[116], (xxx * tileSize) - scrollOffsetX, (yyy * tileSize) - scrollOffsetY, 0, sprScale, sprScale, 0, 0)
+				end
 			end
 		end
 	end
@@ -61,7 +64,10 @@ function drawMiniMap()
 			wall = currentmap[y][x]
 			if wall >= 1 and wall <= 172 then
 				-- love.graphics.setColor(200,200,200)
-				love.graphics.draw(tiles[wall], (x * tileSize) - scrollOffsetX, (y * tileSize) - scrollOffsetY, 0, sprScale, sprScale, 0, 0)
+				if ((x * tileSize) > scrollOffsetX - (tileSize * 2)) and ((x * tileSize) < scrollOffsetX + (currWinWidth) + (tileSize * 2)) and
+					((y * tileSize) > scrollOffsetY - (tileSize * 2)) and ((y * tileSize) < scrollOffsetY + (currWinWidth) + (tileSize * 2)) then
+						love.graphics.draw(tiles[wall], (x * tileSize) - scrollOffsetX, (y * tileSize) - scrollOffsetY, 0, sprScale, sprScale, 0, 0)
+				end
 			end
 		end
 	end
@@ -69,8 +75,13 @@ end
 
 -- Draw the objects code
 function drawObjs()
+	local currWinWidth = love.graphics.getWidth()
+	local currWinHeight = love.graphics.getHeight()
 	for i,v in ipairs(objects) do
-		love.graphics.draw(objects[i].spr, (objects[i].x) - scrollOffsetX, (objects[i].y) - scrollOffsetY, objects[i].rot, sprScale, sprScale, 32, 32)
+		if ((objects[i].x) > scrollOffsetX - (tileSize * 2)) and ((objects[i].x) < scrollOffsetX + (currWinWidth) + (tileSize * 2)) and
+			((objects[i].y) > scrollOffsetY - (tileSize * 2)) and ((objects[i].y) < scrollOffsetY + (currWinWidth) + (tileSize * 2)) then
+			love.graphics.draw(objects[i].spr, (objects[i].x) - scrollOffsetX, (objects[i].y) - scrollOffsetY, objects[i].rot, sprScale, sprScale, 32, 32)
+		end
 	end
 	love.graphics.rectangle("line", (exitobj.x) - scrollOffsetX, (exitobj.y) - scrollOffsetY, tileSize, tileSize)
 end
@@ -266,7 +277,7 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
-			if obj == 210 then
+			if obj == 30 then
 				exitobj.x = xx * tileSize
 				exitobj.y = yy * tileSize
 			end

@@ -1,19 +1,19 @@
 function SpawnItem(objtype, x, y)
-		objecttemp.x = math.floor(x)
-		objecttemp.y = math.floor(y)
-	if objtype == 50 then
+		objecttemp.x = x - 16
+		objecttemp.y = y - 16
+	if objtype == 11 then
 		objecttemp.hp = 0
 		objecttemp.rot = 0
-		objecttemp.thingType = 50		-- Make it a submachine gun
+		objecttemp.thingType = 11		-- Make it a submachine gun
 		objecttemp.sprIndex = 1
 		objecttemp.isenemy = false
 		objecttemp.isboss = false
 		objecttemp.ismoving = false
 		objecttemp.spr = sprTable["gun1"]["norm"]
-	elseif objtype == 51 then
+	elseif objtype == 12 then
 		objecttemp.hp = 0
 		objecttemp.rot = 0
-		objecttemp.thingType = 51		-- Make it a submachine gun
+		objecttemp.thingType = 12		-- Make it a submachine gun
 		objecttemp.sprIndex = 1
 		objecttemp.isenemy = false
 		objecttemp.isboss = false

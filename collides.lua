@@ -126,14 +126,14 @@ end
 
 -- If the player collides with the exit tile, return
 function collideWithExit(x, y)
-	return currentobjmap[math.floor(y / tileSize)][math.floor(x / tileSize)] == 210
+	return currentobjmap[math.floor(y / tileSize)][math.floor(x / tileSize)] == 30
 end
 
 -- Collide with any pickups
 function collideWithItem(x, y)
 	for k, v in ipairs(objects) do
-		local x1 = objects[k].x - 32
-		local y1 = objects[k].y - 32
+		local x1 = objects[k].x + 16
+		local y1 = objects[k].y + 16
 		local sizeX = x1 + tileSize
 		local sizeY = y1 + tileSize
 		

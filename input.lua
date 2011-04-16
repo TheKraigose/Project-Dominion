@@ -245,7 +245,7 @@ function movePlayer(dt)
 			end
 		end
 	end
-	if collideObj ~= nil and collideObj.thingType == 65 then
+	if collideObj ~= nil and collideObj.thingType == 22 then
 		local pickupSuccess = false
 		score = score + 100
 		pickupSuccess = true

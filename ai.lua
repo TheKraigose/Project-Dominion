@@ -22,7 +22,7 @@ function updateObjs()
 					if collideWithPlayerBullet(objects[i].x, objects[i].y) == true then
 						objects[i].hp = objects[i].hp - math.random(4,5)
 						if objects[i].hp <= 0 then
-							SpawnItem(50, objects[i].x - 2, objects[i].y - 2)
+							SpawnItem(11, objects[i].x - 2, objects[i].y - 2)
 							score = score + 100
 							objects[i].spr = sprTable["grunt"]["die1"]
 						end
@@ -58,7 +58,7 @@ function updateObjs()
 					if collideWithPlayerBullet(objects[i].x, objects[i].y) == true then
 						objects[i].hp = objects[i].hp - math.random(3,4)
 						if objects[i].hp <= 0 then
-							SpawnItem(51, objects[i].x - 2, objects[i].y - 2)
+							SpawnItem(12, objects[i].x - 2, objects[i].y - 2)
 							score = score + 200
 							objects[i].spr = sprTable["bird"]["die1"]
 						end
