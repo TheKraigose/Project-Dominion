@@ -21,20 +21,16 @@ end
 
 function checkForRespawn()
 	if respawnHeroTime == 0 then
+		objects = {}
 		currentmap = maps[currmapnum]
 		currentobjmap = objmaps[currmapnum]
 		playerSpawned = false	-- set this so the player can spawn again
 		mapWidth = table.getn(currentmap[1])
 		mapHeight = table.getn(currentmap)
-		for i, v in ipairs(objects) do
-			table.remove(objects, i)
-		end
-		for i, v in ipairs(objects) do
-			table.remove(objects, i)
-		end
 		objectsSpawned = false
 		hero.x = pRespawnPoint.x
 		hero.y = pRespawnPoint.y
+		hero.keys = {false, false}
 		hero.alive = true
 		hero.hp = 100
 		hero.lives = hero.lives - 1

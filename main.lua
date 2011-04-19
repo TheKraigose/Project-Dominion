@@ -2,6 +2,8 @@
 function love.load()
 
 	require("sprites.lua")	-- all sprites are stored here
+	
+	require("audio.lua")	-- all audio sources are stored here
 
 	require("player.lua")	-- player (hero) table
 	

@@ -9,6 +9,10 @@ function updateObjs()
 				objects[i].flagForRemoval = true
 				skipUpdate = true
 			end
+			if collideWithDoorEnemy(newtempX, newtempY) == true then
+				objects[i].flagForRemoval = true
+				skipUpdate = true
+			end
 			if skipUpdate == false then
 				objects[i].x = newtempX
 				objects[i].y = newtempY
@@ -32,13 +36,18 @@ function updateObjs()
 					local dx = hero.x - objects[i].x
 					local dy = hero.y - objects[i].y
 					local dist = math.sqrt(dx*dx + dy*dy)
-					if dist > 120 and dist < 400 then
+					if dist > 120 and dist < 420 then
 						local angle = math.atan2(dy, dx)
 						objects[i].rot = angle
 						local tpos = {}
 						tpos = checkCollision(objects[i].x, objects[i].y, newtempX, newtempY, 0.35)
-						objects[i].x = tpos.x
-						objects[i].y = tpos.y
+						if collideWithDoorEnemy(newtempX, newtempY) == false then
+							objects[i].x = tpos.x
+							objects[i].y = tpos.y
+						else
+							objects[i].x = objects[i].x
+							objects[i].y = objects[i].y
+						end
 					elseif dist <= 120 and isblocking(newtempX, newtempY) == false then
 						if (objects[i].cooldown >= 35) then
 							objects[i].rot = math.atan2(dy, dx)	-- face the player
@@ -68,13 +77,18 @@ function updateObjs()
 					local dx = hero.x - objects[i].x
 					local dy = hero.y - objects[i].y
 					local dist = math.sqrt(dx*dx + dy*dy)
-					if dist > 120 and dist < 400 then
+					if dist > 120 and dist < 440 then
 						local angle = math.atan2(dy, dx)
 						objects[i].rot = angle
 						local tpos = {}
 						tpos = checkCollision(objects[i].x, objects[i].y, newtempX, newtempY, 0.35)
-						objects[i].x = tpos.x
-						objects[i].y = tpos.y
+						if collideWithDoorEnemy(newtempX, newtempY) == false then
+							objects[i].x = tpos.x
+							objects[i].y = tpos.y
+						else
+							objects[i].x = objects[i].x
+							objects[i].y = objects[i].y
+						end
 					elseif dist <= 120 and isblocking(newtempX, newtempY) == false then
 						if (objects[i].cooldown >= 25) then
 							objects[i].rot = math.atan2(dy, dx)	-- face the player
@@ -83,6 +97,25 @@ function updateObjs()
 						else
 							objects[i].cooldown = objects[i].cooldown + 1
 						end
+					end
+				end
+			end
+		end
+		if objects[i].thingType >= 32 and objects[i].thingType <= 37 then
+			if objects[i].doorClosed == false then
+				if objects[i].eventTimer < 200 and objects[i].eventTimer ~= -1 then
+					objects[i].eventTimer = objects[i].eventTimer + 2
+				end
+				if objects[i].eventTimer >= 200 then
+					if collideWithDoorOpenChk(hero.x, hero.y) == false then
+						soundTable["doorclose"]:setVolume(0.1)
+						soundTable["doorclose"]:stop()
+						soundTable["dooropen"]:stop()
+						soundTable["doorclose"]:play()
+						objects[i].doorClosed = true
+						objects[i].eventTimer = -1
+					else
+						objects[i].eventTimer = 0
 					end
 				end
 			end

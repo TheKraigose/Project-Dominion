@@ -39,7 +39,7 @@ end
 -- draw the title screen and message
 function drawTitleScreen()
 	love.graphics.draw(titlePics[0], 0, 0, 0, 1, 1, 0, 0)
-	love.graphics.printf("Press space or enter to start", 1024 / 2.5, 768 / 2, 256, "center")
+	love.graphics.printf("Press enter to start", 1024 / 2.5, 768 / 2, 256, "center")
 	-- draw text at the middle of the screen																							-- to tell player how to start game.
 end
 
@@ -80,7 +80,9 @@ function drawObjs()
 	for i,v in ipairs(objects) do
 		if ((objects[i].x) > scrollOffsetX - (tileSize * 2)) and ((objects[i].x) < scrollOffsetX + (currWinWidth) + (tileSize * 2)) and
 			((objects[i].y) > scrollOffsetY - (tileSize * 2)) and ((objects[i].y) < scrollOffsetY + (currWinWidth) + (tileSize * 2)) then
-			love.graphics.draw(objects[i].spr, (objects[i].x) - scrollOffsetX, (objects[i].y) - scrollOffsetY, objects[i].rot, sprScale, sprScale, 32, 32)
+			if objects[i].doorClosed == true or objects[i].doorClosed == nil then
+				love.graphics.draw(objects[i].spr, (objects[i].x) - scrollOffsetX, (objects[i].y) - scrollOffsetY, objects[i].rot, sprScale, sprScale, 32, 32)
+			end
 		end
 	end
 	love.graphics.rectangle("line", (exitobj.x) - scrollOffsetX, (exitobj.y) - scrollOffsetY, tileSize, tileSize)
@@ -91,15 +93,15 @@ function spawnObjects()
 		for xx=1, mapWidth, 1 do	
 			obj = currentobjmap[yy][xx]
 			if obj == 26 and playerSpawned == false then
-				hero.x = xx * tileSize
-				hero.y = yy * tileSize
+				hero.x = xx * tileSize + (tileSize / 2)
+				hero.y = yy * tileSize + (tileSize / 2)
 				hero.rot = math.rad(0)
 				playerSpawned = true	-- so if there's a duplicate spawn
 										-- we only spawn at the first one found
 				plyrPosX = xx	-- remember the player's spawn point in case of death
 				plyrPosY = yy
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				pRespawnPoint = objecttemp
 				objecttemp = {}
 				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
@@ -112,8 +114,8 @@ function spawnObjects()
 										-- we only spawn at the first one found
 				plyrPosX = xx	-- remember the player's spawn point in case of death
 				plyrPosY = yy
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				pRespawnPoint = objecttemp
 				objecttemp = {}
 				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
@@ -126,8 +128,8 @@ function spawnObjects()
 										-- we only spawn at the first one found
 				plyrPosX = xx	-- remember the player's spawn point in case of death
 				plyrPosY = yy
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				pRespawnPoint = objecttemp
 				objecttemp = {}
 				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
@@ -140,8 +142,8 @@ function spawnObjects()
 										-- we only spawn at the first one found
 				plyrPosX = xx	-- remember the player's spawn point in case of death
 				plyrPosY = yy
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				pRespawnPoint = objecttemp
 				objecttemp = {}
 				currentobjmap[yy][xx] = 0  -- clear the player spawn spot
@@ -149,8 +151,8 @@ function spawnObjects()
 			-- if a basic grunt?
 			if obj == 1 then
 				math.randomseed(os.time())
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 10
 				objecttemp.rot = math.random(1.0, 3.0)
 				objecttemp.thingType = 1			-- make it a guard
@@ -165,8 +167,8 @@ function spawnObjects()
 			end
 			if obj == 2 then
 				math.randomseed(os.time())
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 20
 				objecttemp.rot = math.random(1.0, 3.0)
 				objecttemp.thingType = 2			-- make it a bird soldier
@@ -180,8 +182,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 11 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 11		-- submachine gun
@@ -194,8 +196,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 12 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 12		-- submachine ammo
@@ -208,8 +210,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 				if obj == 13 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 13		-- Chaingun
@@ -222,8 +224,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 14 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 14		-- Chaingun Ammo
@@ -236,8 +238,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 19 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 19		-- Small Health Kit
@@ -249,9 +251,23 @@ function spawnObjects()
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end
+			if obj == 20 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 20		-- Small Health Kit
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["bighealth"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
 			if obj == 21 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 21		-- Make it a 1up
@@ -264,8 +280,8 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 22 then
-				objecttemp.x = xx * tileSize
-				objecttemp.y = yy * tileSize
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 0
 				objecttemp.rot = 0
 				objecttemp.thingType = 22		-- Make it a score item (Freshslice)
@@ -274,6 +290,166 @@ function spawnObjects()
 				objecttemp.isboss = false
 				objecttemp.ismoving = false
 				objecttemp.spr = sprTable["scorea"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 23 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 23		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["scoreb"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 24 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 24		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["scorec"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 25 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 25		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["scored"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 32 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 32		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doornhz"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 33 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 33		-- Make it a score item (Coffee)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doornvt"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 34 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 34		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doorbhz"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 35 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 35		-- Make it a score item (Coffee)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doorbvt"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 36 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 36		-- Make it a score item (Freshslice)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doorrhz"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 37 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 37		-- Make it a score item (Coffee)
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["doorrvt"]["norm"]
+				objecttemp.doorClosed = true
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 38 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 38		-- Small Health Kit
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["blukey"]["norm"]
+				table.insert(objects, objecttemp)
+				objecttemp = {}
+			end
+			if obj == 39 then
+				objecttemp.x = xx * tileSize + (tileSize / 2)
+				objecttemp.y = yy * tileSize + (tileSize / 2)
+				objecttemp.hp = 0
+				objecttemp.rot = 0
+				objecttemp.thingType = 39		-- Small Health Kit
+				objecttemp.sprIndex = 1
+				objecttemp.isenemy = false
+				objecttemp.isboss = false
+				objecttemp.ismoving = false
+				objecttemp.spr = sprTable["redkey"]["norm"]
 				table.insert(objects, objecttemp)
 				objecttemp = {}
 			end

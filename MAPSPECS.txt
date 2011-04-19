@@ -41,3 +41,11 @@ Objects layer
 29 = player spawn point (North)
 30 = exit (normal)
 31 = exit (secret)
+32 = door normal horizontal
+33 = door normal vertical
+34 = door locked (blue) horiz
+35 = door locked (blue) vert
+36 = door locked (red) horiz
+37 = door locked (red) vert
+38 = blue key
+39 = red key

@@ -29,6 +29,8 @@
 	objecttemp.ismoving = false	-- if the enemy is allowed to move?
 	objecttemp.spr = nil		-- sprites for object (total of 8 per object allowed)
 	objecttemp.flagForRemoval = false
+	objecttemp.doorClosed = false
+	objecttemp.eventTimer = -1
 	
 	exitobj = {}
 	exitobj.x = -128

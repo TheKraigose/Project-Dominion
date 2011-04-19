@@ -14,6 +14,8 @@
 	hero.sprIndex = 1
 	hero.spr = {}
 	hero.spr = sprTable["player"][sprStateTable[hero.sprIndex]]
+	hero.touchingDoor = false
+	hero.keys = {false, false}
 	firedpistol = false
 	firedsubmac = false
 	firedchain = false
@@ -26,6 +28,7 @@
 	
 	respawnHeroTime = 75
 	pauseCooldown = 60
+	openDoorCooldown = 30
 	
 	-- speed modifiers
 	shiftSpeed = 4

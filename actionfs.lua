@@ -36,6 +36,9 @@ function A_FirePlayerBullet(typeOfBul)
 	objecttemp.isboss = false
 	objecttemp.ismoving = false
 	if typeOfBul == 1 or typeOfBul == 2 then
+		soundTable["shoot1"]:setVolume(0.1)
+		soundTable["shoot1"]:stop()
+		soundTable["shoot1"]:play()
 		objecttemp.spr = sprTable["bullet"]["norm"]
 	end
 	table.insert(objects, objecttemp)
@@ -53,6 +56,9 @@ function A_BulletAttack(typeOfBul, x, y, rot)
 	objecttemp.isboss = false
 	objecttemp.ismoving = false
 	if typeOfBul == 1 or typeOfBul == 2 then
+		soundTable["shoot1"]:setVolume(0.1)
+		soundTable["shoot1"]:stop()
+		soundTable["shoot1"]:play()
 		objecttemp.spr = sprTable["bullet"]["norm"]
 	end
 	table.insert(objects, objecttemp)
