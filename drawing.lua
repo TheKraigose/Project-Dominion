@@ -89,6 +89,7 @@ function drawObjs()
 end
 
 function spawnObjects()
+	math.randomseed(os.time())
 	for yy=1, mapHeight, 1 do
 		for xx=1, mapWidth, 1 do	
 			obj = currentobjmap[yy][xx]
@@ -150,11 +151,10 @@ function spawnObjects()
 			end
 			-- if a basic grunt?
 			if obj == 1 then
-				math.randomseed(os.time())
 				objecttemp.x = xx * tileSize + (tileSize / 2)
 				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 10
-				objecttemp.rot = math.random(1.0, 3.0)
+				objecttemp.rot = math.rad(math.random(0, 359))
 				objecttemp.thingType = 1			-- make it a guard
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = true
@@ -166,11 +166,10 @@ function spawnObjects()
 				objecttemp = {}
 			end
 			if obj == 2 then
-				math.randomseed(os.time())
 				objecttemp.x = xx * tileSize + (tileSize / 2)
 				objecttemp.y = yy * tileSize + (tileSize / 2)
 				objecttemp.hp = 20
-				objecttemp.rot = math.random(1.0, 3.0)
+				objecttemp.rot = math.rad(math.random(0, 359))
 				objecttemp.thingType = 2			-- make it a bird soldier
 				objecttemp.sprIndex = 1
 				objecttemp.isenemy = true
